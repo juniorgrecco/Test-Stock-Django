@@ -1,0 +1,52 @@
+{% extends "home.html" %}
+
+    
+{% block content %}
+    {% if message %}
+        <div class="alert alert-danger" role="alert">
+        {{ message }}
+        </div>
+    {% endif %}
+
+    {% if perfis %}
+    <table class="table caption-top">
+        <thead class="table-light">
+            <tr>
+                <th scope="col">QTD.</th>
+                <th scope="col">Linha</th>
+                <th scope="col">Código</th>
+                <th scope="col">Peso kg/m</th>
+                <th scope="col">Acabamento-(RAL)</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rel_perfis in perfis %}    
+            <tr>
+                <td>{{ rel_perfis.quantidade }}</td>
+                <td>{{ rel_perfis.linha }}</td>
+                <td>{{ rel_perfis.codigo_perfil }}</td>
+                <td>{{ rel_perfis.peso_kg_m }}</td>
+                <td>{{ rel_perfis.acabamento_cor }}</td>
+                <td>{{ rel_perfis.descricao }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{% url 'estoqueapp:editar_perfis' rel_perfis.id %}" role="button" aria-disabled="true">
+                        <span class="text-light text-center">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </span>
+                    </a>
+                    <a class="btn btn-danger" href="{% url 'estoqueapp:delete_perfis' rel_perfis.id %}" role="button" aria-disabled="true">
+                        <span class="text-light text-center">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        {% else %}
+            <h2>Não existem perfis cadastrados.</h2>
+        {% endif %}
+{% endblock %}

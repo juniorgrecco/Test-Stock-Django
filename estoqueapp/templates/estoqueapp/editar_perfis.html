@@ -1,0 +1,12 @@
+{% extends "home.html" %}
+
+{% block content %}
+    <h1>Editar perfil no estoque.</h1>
+
+    <form action="{% url 'estoqueapp:editar_perfis' rel_perfis_id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="reset" class="btn btn-danger">Reset</button>
+   </form>
+{% endblock %}
